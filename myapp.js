@@ -17,10 +17,10 @@ angular.module('myapp',[])
        'color' : 'green',
        'height' : '10px',
        'width' : '10px',
-	'float':'left',
-	'display' : 'flex',
-	'justify-content' : 'space-around',
-	'margin' : '2px'
+        'float':'left',
+        'display' : 'flex',
+        'justify-content' : 'space-around',
+        'margin' : '2px'
        })
   }
   $scope.box = colorbox;

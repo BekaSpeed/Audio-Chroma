@@ -10,7 +10,7 @@ angular.module('myapp',[])
   $scope.boxes = [];
   for(i = 0; i < 200; i++) {
     hex_color = '';
-    for(j = 0; j < 5; j++) {hex_color += Math.floor(Math.random()*16).toString(16);}
+    for(j = 0; j < 6; j++) {hex_color += Math.floor(Math.random()*16).toString(16);}
     console.log(hex_color);
     $scope.boxes.push({
        'background-color' : '#'+hex_color,

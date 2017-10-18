@@ -8,22 +8,20 @@ angular.module('myapp',[])
     'display' : 'inline-block'
   };
   $scope.boxes = [];
-  for(i = 0; i < 400; i++) {
-    c1 = Math.floor(Math.random()*255).toString(16);
-    c2 = Math.floor(Math.random()*255).toString(16);
-    c3 = Math.floor(Math.random()*255).toString(16);
-    console.log(c1+c2+c3);
+  for(i = 0; i < 200; i++) {
+    hex_color = '';
+    for(j = 0; j < 6; j++) {hex_color += Math.floor(Math.random()*16).toString(16);}
+    console.log(hex_color);
     $scope.boxes.push({
-       'background-color' : '#'+c1+c2+c3,
+       'background-color' : '#'+hex_color,
        'color' : 'green',
        'height' : '10px',
        'width' : '10px',
-	'float':'left',
-	'display' : 'flex',
-	'justify-content' : 'space-around',
-	'margin' : '2px'
+        'float':'left',
+        'display' : 'flex',
+        'justify-content' : 'space-around',
+        'margin' : '2px'
        })
-
   }
   $scope.box = colorbox;
   $scope.data = 'my data';

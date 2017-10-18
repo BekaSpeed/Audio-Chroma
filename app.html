@@ -14,6 +14,10 @@
             float: left;
             
         }
+        #box:hover
+        {
+            color:floralwhite;
+        }
     </style>
 </head>
 
@@ -21,7 +25,7 @@
   <div ng-app="myapp" ng-controller="MainCtrl">
     <div id="boxes" ng-repeat="box in boxes">
         <div>       
-         <div ng-style="box">
+         <div id="box" ng-style="box">
          </div>       
         </div>
     </div>

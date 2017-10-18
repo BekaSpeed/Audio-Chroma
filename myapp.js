@@ -8,7 +8,7 @@ angular.module('myapp',[])
     'display' : 'inline-block'
   };
   $scope.boxes = [];
-  for(i = 0; i < 10; i++) {
+  for(i = 0; i < 200; i++) {
     c1 = Math.floor(Math.random()*255).toString(16);
     c2 = Math.floor(Math.random()*255).toString(16);
     c3 = Math.floor(Math.random()*255).toString(16);
@@ -17,8 +17,11 @@ angular.module('myapp',[])
        'background-color' : '#'+c1+c2+c3,
        'color' : 'green',
        'height' : '10px',
-       'width' : '5%',
-       'display' : 'inline-block'
+       'width' : '10px',
+	'float':'left',
+	'display' : 'flex',
+	'justify-content' : 'space-around',
+	'margin' : '2px'
        })
   }
   $scope.box = colorbox;

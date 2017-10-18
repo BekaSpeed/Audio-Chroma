@@ -4,13 +4,26 @@
   <title>Color Fun</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="myapp.js"></script>
+    <style>
+        body{
+            background-color: "#ffffff";
+        }
+        #boxes
+        {
+            overflow: hidden;
+            float: left;
+            
+        }
+    </style>
 </head>
 
 <body>
   <div ng-app="myapp" ng-controller="MainCtrl">
-    <div ng-repeat="box in boxes">
-      <div ng-style="box">
-      </div>
+    <div id="boxes" ng-repeat="box in boxes">
+        <div>       
+         <div ng-style="box">
+         </div>       
+        </div>
     </div>
   </div>
 </body>

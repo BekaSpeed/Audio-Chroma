@@ -1,6 +1,8 @@
 angular.module("Page", []) 
 .controller('PageController', function($scope) {
-    $scope.tracks = ["Final_Fantasy_6_Magicite_Made_My_Mind_Melt_OC_ReMix.mp3"];
+
+    var tracks = ["Final_Fantasy_6_Magicite_Made_My_Mind_Melt_OC_ReMix.mp3"];
+
     $scope.playTracks = function(tracks) {
         angular.forEach(tracks, function(track, key) {
             track.play();

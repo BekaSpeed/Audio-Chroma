@@ -8,8 +8,10 @@
 
 <body>
   <div ng-app="myapp" ng-controller="MainCtrl">
-    <div ng-style="box">my box</div>  
-
+    <div ng-repeat="box in boxes">
+      <div ng-style="box">
+      </div>
+    </div>
   </div>
 </body>
 </html>

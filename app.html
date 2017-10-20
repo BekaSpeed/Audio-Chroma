@@ -3,31 +3,19 @@
 <head>
   <title>Color Fun</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
   <script src="myapp.js"></script>
     <style>
         body{
             background-color: "#ffffff";
         }
-        #boxes
-        {
-            overflow: hidden;
-            float: left;
-            
-        }
-        #box:hover
-        {
-            color:floralwhite;
-        }
     </style>
 </head>
-
-<body>
-  <div ng-app="myapp" ng-controller="MainCtrl">
-    <div id="boxes" ng-repeat="box in boxes">
-        <div>       
-         <div id="box" ng-style="box">
-         </div>       
-        </div>
+<body ng-app="myapp">
+  <div ng-controller="MainCtrl" ng-init="vis = '1'">
+    <div style="opacity: {{vis}}"  ng-repeat="box in boxes">
+      <div ng-style="box" ng-mouseover="vis = '0'">
+      </div>
     </div>
   </div>
 </body>

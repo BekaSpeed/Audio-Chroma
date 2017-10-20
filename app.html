@@ -1,33 +1,40 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <title>Color Fun</title>
+  <title>Negative Space</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
   <script src="myapp.js"></script>
     <style>
         body{
             background-color: "#ffffff";
+	    
         }
-        #boxes
-        {
-            overflow: hidden;
-            float: left;
-            
-        }
-        #box:hover
-        {
-            color:floralwhite;
-        }
+        
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0%   {background-color: red;}
+    25%  {background-color: yellow;}
+    50%  {background-color: blue;}
+    100% {background-color: green;}
+}        
+/* Standard syntax */
+@keyframes example {
+    0%   {background-color: red;}
+    25%  {background-color: yellow;}
+    50%  {background-color: blue;}
+    100% {background-color: green;}
+}
     </style>
 </head>
-
-<body>
-  <div ng-app="myapp" ng-controller="MainCtrl">
-    <div id="boxes" ng-repeat="box in boxes">
-        <div>       
-         <div id="box" ng-style="box">
-         </div>       
-        </div>
+<body ng-app="myapp">
+    <header>
+        Draw by deleting squares with a click!
+ (You don't have to wait for them to disapear befor clicking your next square) 
+    </header>
+  <div ng-controller="MainCtrl" ng-init="vis = '1'">
+    <div style="-webkit-opacity: {{vis}}"  ng-repeat="box in boxes">
+      <div ng-style="box" ng-click="vis = '0'">
+      </div>
     </div>
   </div>
 </body>

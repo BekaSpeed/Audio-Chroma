@@ -1,63 +1,56 @@
-angular.module("Page", []) 
-.controller('PageController', function($scope) {
+var tracks = ["Final_Fantasy_6_Magicite_Made_My_Mind_Melt_OC_ReMix.mp3"];
 
-    var tracks = ["Final_Fantasy_6_Magicite_Made_My_Mind_Melt_OC_ReMix.mp3"];
 
-    $scope.playTracks = function(tracks) {
-        angular.forEach(tracks, function(track, key) {
-            track.play();
-        });
-        $scope.playing = true;
-    };
-    
-    function tick() {
-        angular.forEach($scope.currentSong.tracks, function(track, key) {
-            if (track.analyser) {
-                _drawStuff(track.cCtx, track.analyser);
-            }
-        });
-        window.requestAnimationFrame(tick);
+var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+var analyser = audioCtx.createAnalyser();
+ var audio = document.getElementById('audio');
+var audioSrc = audioCtx.createMediaElementSource(audio);
+audioSrc.connect(analyser);
+
+analyser.fftSize = 2048;
+var bufferLength = analyser.frequencyBinCount;
+var dataArray = new Uint8Array(bufferLength);
+analyser.getByteTimeDomainData(dataArray);
+
+// Get a canvas defined with ID "oscilloscope"
+var canvas = document.getElementById("oscilloscope");
+var canvasCtx = canvas.getContext("2d");
+
+// draw an oscilloscope of the current audio source
+
+function draw() {
+
+  drawVisual = requestAnimationFrame(draw);
+
+  analyser.getByteTimeDomainData(dataArray);
+
+  canvasCtx.fillStyle = 'rgb(200, 200, 200)';
+  canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+  canvasCtx.lineWidth = 2;
+  canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+
+  canvasCtx.beginPath();
+
+  var sliceWidth = canvas.width * 1.0 / bufferLength;
+  var x = 0;
+
+  for (var i = 0; i < bufferLength; i++) {
+
+    var v = dataArray[i] / 128.0;
+    var y = v * canvas.height / 2;
+
+    if (i === 0) {
+      canvasCtx.moveTo(x, y);
+    } else {
+      canvasCtx.lineTo(x, y);
     }
-})
- .controller('TrackController', function($scope, $element) {
-    $scope.trackVolume = 100;
-    $scope.canvas = $element[0].getElementsByTagName('canvas')[0];
-    
-    $scope.track.play = function() {
-        $scope.track.audio.play();
-    };
-    
-    $scope.track.stop = function() {
-        $scope.track.audio.pause();
-    };
-    
-    $scope.$watch('trackVolume', function(value) {
-        value = value / 100;
-        if ($scope.track.gainNode) {
-            $scope.track.gainNode.gain.value = value;
-        }
-    });
-});
 
-var analyser = _aCtx.createAnalyser();
-analyser.smoothingTimeConstant = 0.6;
-analyser.fftSize = 256;
+    x += sliceWidth;
+  }
 
-// Each frame:
-var byteFreqArr = new Uint8Array(analyser.frequencyBinCount);
-analyser.getByteFrequencyData(byteFreqArr);
+  canvasCtx.lineTo(canvas.width, canvas.height / 2);
+  canvasCtx.stroke();
+};
 
-var timeDomainArr = new Uint8Array(analyser.frequencyBinCount);
-analyser.getByteTimeDomainData(timeDomainArr);
-
-canvasContext.clearRect(0, 0, _cWidth, _cHeight);
-canvasContext.beginPath();
-
-for (var i=0,iLen=byteFreqArr.length; i<iLen; i++) {
-    canvasContext.fillRect(i*_freqDrawWidth, _cHeight - (byteFreqArr[i] / 256 * _cHeight), (_freqDrawWidth - 2), _cHeight);
-    
-    var percent = timeDomainArr[i] / 256;
-    var offset = _cHeight - (percent * _cHeight) - 1;
-    canvasContext.lineTo(i*_timeDrawWidth, offset);
-}
-canvasContext.stroke();
+draw();

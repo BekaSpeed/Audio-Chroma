@@ -1,9 +1,8 @@
 var tracks = ["Final_Fantasy_6_Magicite_Made_My_Mind_Melt_OC_ReMix.mp3"];
 
-
 var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 var analyser = audioCtx.createAnalyser();
- var audio = document.getElementById('audio');
+var audio = document.getElementById('audio');
 var audioSrc = audioCtx.createMediaElementSource(audio);
 audioSrc.connect(analyser);
 

@@ -5,6 +5,7 @@ var analyser = audioCtx.createAnalyser();
 var audio = document.getElementById('audio');
 var audioSrc = audioCtx.createMediaElementSource(audio);
 audioSrc.connect(analyser);
+audioSrc.connect(audioCtx.destination);
 
 analyser.fftSize = 2048;
 var bufferLength = analyser.frequencyBinCount;

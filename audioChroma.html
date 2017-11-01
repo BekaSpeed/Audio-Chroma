@@ -11,36 +11,31 @@
             background-color: "#ffffff";
 
         }
-        /* Safari 4.0 - 8.0 */
-        @-webkit-keyframes example {
-            0%   {background-color: red;}
-            25%  {background-color: yellow;}
-            50%  {background-color: blue;}
-            100% {background-color: green;}
-        }
-        /* Standard syntax */
-        @keyframes example {
-            0%   {background-color: red;}
-            25%  {background-color: yellow;}
-            50%  {background-color: blue;}
-            100% {background-color: green;}
-        }
+		.box
+		{
+		width: 3vw;
+		height: 3vh;
+		float: left;
+		display : flex;
+		justify-content : space-around;
+		margin : 1px;
+		}
+   
     </style>
 </head>
-<body ng-app="myapp">
+<body>
 <audio src="Final_Fantasy_6_Magicite_Made_My_Mind_Melt_OC_ReMix.mp3" id="audio" controls>Audio not supported</audio>
     <div class="track-container">
         <div class="track">
             <canvas id="oscilloscope"></canvas>
         </div>
     </div>
-    <div ng-controller="MainCtrl" ng-init="vis = '1'">
-      <div style="-webkit-opacity: {{vis}}"  ng-repeat="box in boxes">
-        <div ng-style="box">
+    <div>
+        <div id="boxes">
         </div>
-      </div>
     </div>
     <script src="audioChroma.js"></script>
 </body>
 
 </html>
+

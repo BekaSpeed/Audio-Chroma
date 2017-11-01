@@ -1,3 +1,17 @@
+var boxes = [];
+
+for(i = 0; i < 930; i++) {
+  hex_color = '';
+  for(j = 0; j < 6; j++) {hex_color += Math.floor(Math.random()*16).toString(16);}
+  console.log(hex_color);
+  var box = document.createElement('div');
+  box.className = "box";
+  box.style.backgroundColor = '#'+hex_color;
+  document.getElementById('boxes').appendChild(box);
+  boxes.push(box);
+}
+
+
 var tracks = ["Final_Fantasy_6_Magicite_Made_My_Mind_Melt_OC_ReMix.mp3"];
 
 var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
@@ -46,6 +60,12 @@ function draw() {
       canvasCtx.lineTo(x, y);
     }
 
+    if (i % analyser.frequencyBinCount == 0) {
+      for (var j = 0; j < boxes.length; ++j) {
+        boxes[j].style.backgroundColor = "rgb(" + (x % 256) + ", " + (y % 256) + ", " + (j % 256) + ")";
+      }
+    }
+
     x += sliceWidth;
   }
 
@@ -54,15 +74,3 @@ function draw() {
 };
 
 draw();
-
-  boxes = [];
-
-  for(i = 0; i < 930; i++) {
-    hex_color = '';
-    for(j = 0; j < 6; j++) {hex_color += Math.floor(Math.random()*16).toString(16);}
-    console.log(hex_color);
-	var box = document.createElement('div');
-	box.className = "box";
-	box.style.backgroundColor = '#'+hex_color;
-	document.getElementById('boxes').appendChild(box);
-  }

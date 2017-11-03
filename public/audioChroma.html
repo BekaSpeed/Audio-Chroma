@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Chroma</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="crossorigin="anonymous">
+  </script>
+    <style>
+      body {
+          background-color: #d3d3d3;
+      }
+
+      p {
+          font-family: Calibri Verdana sans-serif;
+      }
+
+      .box {
+    		width: 3vw;
+    		height: 3vh;
+    		float: left;
+    		display : flex;
+        border-radius: 2px;
+    		justify-content : space-around;
+    		margin : 1px;
+        -webkit-transition: background-color 0.000001s ease-in-out;
+        -moz-transition: background-color 0.000001s ease-in-out;
+        -o-transition: background-color 0.000001s ease-in-out;
+        -khtml-transition: background-color 0.000001s ease-in-out;
+        transition: background-color 0.000001s ease-in-out;
+  		}
+
+      #songs {
+
+      }
+    </style>
+</head>
+<body>
+  <table>
+      <tr>
+        <td>
+          <audio src="music/Darkesword - Ancient Hero.mp3" id="audio" controls>Audio not supported</audio>
+        </td>
+        <td>
+          <select id="songs">
+          </select>
+        </td>
+        <td>
+          <p>Pick a song and press play to start the audio-visualization.</p>
+        </td>
+      </tr>
+    </table>
+    <!-- <div class="track-container"> -->
+        <!-- <div class="track"> -->
+            <!-- <canvas id="oscilloscope"></canvas> -->
+        <!-- </div> -->
+    <!-- </div> -->
+
+    <div id="boxes">
+    </div>
+</body>
+
+<script src="audioChroma.js"></script>
+
+</html>

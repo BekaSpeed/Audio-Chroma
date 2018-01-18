@@ -1,5 +1,10 @@
 var boxes = [];
-
+var fequencies = [16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,37,39,41,44,47,49,52,
+					55,58,62,65,69,73,78,82,83,87,92,93,98,104,110,116,117,123,131,138,139,147,155,156,
+					165,175,185,196,208,220,233,247,262,277,293,294,311,330,349,370,392,415,440,466,494,
+					523,554,587,622,659,698,699,740,784,831,880,932,988,1046,1047,1109,1175,1244,1245,
+					1318,1319,1397,1480,1568,1661,1760,1865,1975,1976,2093,2217,2349,2489,2637,2794,2960,
+					3136,3322,3323,3520,3729,3951,4186,4435,4699,4978,5274,5587,5588,5920,6272,6645, 7040,7459,7902];
 for(i = 0; i < 930; i++) {
   hex_color = '';
   for(j = 0; j < 6; j++) {hex_color += Math.floor(Math.random()*16).toString(16);}
@@ -38,58 +43,48 @@ var audioSrc = audioCtx.createMediaElementSource(audio);
 audioSrc.connect(analyser);
 audioSrc.connect(audioCtx.destination);
 
-analyser.fftSize = 2048;
+analyser.fftSize = 4096;
 var bufferLength = analyser.frequencyBinCount;
 var dataArray = new Uint8Array(bufferLength);
 analyser.getByteTimeDomainData(dataArray);
+//console.log(dataArray);
 
-// Get a canvas defined with ID "oscilloscope"
-// var canvas = document.getElementById("oscilloscope");
-// var canvasCtx = canvas.getContext("2d");
-var cycle = 0;
-
-// draw an oscilloscope of the current audio source
 
 function draw() {
 
-  drawVisual = requestAnimationFrame(draw);
-
+ 
   analyser.getByteTimeDomainData(dataArray);
+ 
+  var num_of_slices = 30 * 31,
+  STEP = Math.floor(dataArray.length /num_of_slices),
+  No_Signal = 128;
+  
+ drawVisual = requestAnimationFrame(draw);
+ 
+  for (var i = 0, n = 0; i < num_of_slices; i++, n+=STEP) {
 
-  // canvasCtx.fillStyle = 'rgb(200, 200, 200)';
-  // canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+    
+	//var slice = boxes[i];
+    var val = Math.abs(dataArray[n]) / No_Signal;
+	var balance =  Math.abs(dataArray[n]) - No_Signal;
+	//if(balance != 0){console.log(n + " : "+ balance);}
+	
+   hex_color = '';
+   var a = i % 31;
+   var mod = (a/32);//does not go over 1
+   var N = n;
+   var b = 8+val;//val does not go over 2 (as far as i know)
+   var c = i / 58.125;//does not go over 16
+   
+	hex_color += Math.floor(Math.pow((val-.5),4)+1).toString(16);
+	hex_color += Math.floor(Math.pow((val-.5),4)+1).toString(16);
+	hex_color += Math.floor(Math.abs(balance)/2).toString(16);
+	hex_color += Math.floor(Math.abs(balance)/2).toString(16);
+	hex_color += Math.floor((Math.pow((balance),2)/26)+1).toString(16);
+	hex_color += Math.floor((Math.pow((balance),2)/26)+1).toString(16);
 
-  // canvasCtx.lineWidth = 2;
-  // canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
-
-  // canvasCtx.beginPath();
-
-  var sliceWidth = 300 * 1.0 / bufferLength;
-  // var sliceWidth = canvas.width * 1.0 / bufferLength;
-  var x = 0;
-
-  for (var i = 0; i < bufferLength; i++) {
-
-    var v = dataArray[i] / 128.0;
-    // var y = v * canvas.height / 2;
-
-    // if (i === 0) {
-      // canvasCtx.moveTo(x, y);
-    // } else {
-      // canvasCtx.lineTo(x, y);
-    // }
-
-    x += sliceWidth;
-
-    var z = Math.abs(v * 150 / 2);
-    if (i % (10000 * analyser.frequencyBinCount) == 0 && !audio.paused) {
-      cycle = (cycle + z * 501) % 360;
-      for (var j = 0; j < boxes.length; ++j) {
-        var color = "hsl(" + (cycle + (j * 11) % 360) + ", " + (100) + "%, " + (50) + "%)";
-        boxes[j].style.backgroundColor = color;
-        // boxes[j].css("background-color", color);
-      }
-    }
+    //console.log(hex_color);
+	boxes[i].style.backgroundColor = '#' + hex_color;
   }
 };
 

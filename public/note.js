@@ -130,7 +130,7 @@ function draw() {
 	
   }
 };
-
+ 
 draw();
 
 alert('WARNING!  Do not use if you are epileptic or prone to seizures.');

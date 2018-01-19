@@ -3924,3 +3924,15 @@ Error: Cannot find module 'ejs'
     at /opt/bitnami/apache2/htdocs/CreativeProject3/AudioChroma/app.js:53:7
     at Layer.handle_error (/opt/bitnami/apache2/htdocs/CreativeProject3/AudioChroma/node_modules/express/lib/router/layer.js:71:5)
     at trim_prefix (/opt/bitnami/apache2/htdocs/CreativeProject3/AudioChroma/node_modules/express/lib/router/index.js:310:13)
+[0mGET /favicon.ico [31m500 [0m0.645 ms - 1071[0m
+Error: Cannot find module 'ejs'
+    at Function.Module._resolveFilename (module.js:469:15)
+    at Function.Module._load (module.js:417:25)
+    at Module.require (module.js:497:17)
+    at require (internal/module.js:20:19)
+    at new View (/opt/bitnami/apache2/htdocs/CreativeProject3/AudioChroma/node_modules/express/lib/view.js:78:30)
+    at EventEmitter.render (/opt/bitnami/apache2/htdocs/CreativeProject3/AudioChroma/node_modules/express/lib/application.js:569:12)
+    at ServerResponse.render (/opt/bitnami/apache2/htdocs/CreativeProject3/AudioChroma/node_modules/express/lib/response.js:961:7)
+    at /opt/bitnami/apache2/htdocs/CreativeProject3/AudioChroma/app.js:53:7
+    at Layer.handle_error (/opt/bitnami/apache2/htdocs/CreativeProject3/AudioChroma/node_modules/express/lib/router/layer.js:71:5)
+    at trim_prefix (/opt/bitnami/apache2/htdocs/CreativeProject3/AudioChroma/node_modules/express/lib/router/index.js:310:13)

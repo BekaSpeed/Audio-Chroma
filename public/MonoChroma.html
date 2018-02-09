@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <title>Audio Chroma</title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./stylesheets/audioChroma.css">
     <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-	<link rel="stylesheet" href="./stylesheets/audioChroma.css">
 	<link rel="shortcut icon" type="image/x-icon" href="/AC_logo.png"/>
 </head>
 <body>
@@ -28,8 +28,8 @@
           <li>
             <a class="active" href="#">Current Iterations<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="hidden">
-              <li><a href="/MonoChroma.html">MonoChroma</a></li>
-              <li><a class="active" href="/audioChroma.html">A Foray into Color</a></li>
+              <li><a class="active" href="/MonoChroma.html">MonoChroma</a></li>
+              <li><a href="/audioChroma.html">A Foray into Color</a></li>
               <li><a href="#">Future Edition</a></li>
             </ul>
           </li>
@@ -39,35 +39,37 @@
       </div>	
       </div>
       <div class="sidebar">
-	<h1>Color - 1st attempt</h1>
-	<p>Pick a song and press play to start the audio-visualization.</p>
-	<p>This was the 2nd working edition of my audio visualizer.</P>
-
+	<h1>MonoChroma</h1>
+	<p>Pick a song and press play to start the audio-visualization.<br>
+	This was the first working edition of my audio visualizer.</P>
       </div>
+	  
       <div class="main">
 	
         
-		
 		<div class="control-panel">
         <audio src="music/Legend_of_Zelda_Zelda_Heineken_OC_ReMix.mp3" id="audio" controls>Audio not supported</audio>
 		<select id="songs">
         </select>
 		</div>
+     
    
 
     <div id="boxes">
     </div>
-		
-		
       </div>
+	  
+	 
+	  
       <div class="footer">
-		<p>Art for the sake of Art</p>
+	<p>Art for the sake of Art</p>
+	<a href="https://getsongbpm.com/">Empowered by<img src="logo_bpm.png"  height="42" width="auto"></a>
       </div>
     </div>
 
 	
 </body>
 
-<script src="note.js"></script>
+<script src="audioChroma.js"></script>
 
 </html>

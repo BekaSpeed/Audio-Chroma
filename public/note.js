@@ -17,6 +17,21 @@ for(i = 0; i < resolution; i++) {
   boxes.push(box);
 }
 
+$.getJSON('/getMusicData', function(json) {
+  var data = '<p></p>';
+  $.each(json, function(i, item) {
+    data += '<p>'  + item + '</p>';
+  });
+  $('.sidebar').html(data);
+})
+.done(function() { console.log('getMusicData getJSON request succeeded!'); })
+.fail(function(jqXHR, textStatus, errorThrown) {
+  console.log('getMusicData getJSON request failed! ' + textStatus);
+  console.log('incoming ' + jqXHR.responseText);
+})
+.always(function() { console.log('getMusicData getJSON request ended!');
+});
+
 $.getJSON('/getMusic', function(json) {
   var options = '<option value=""></option>';
   $.each(json, function(i, item) {
@@ -62,55 +77,78 @@ function draw() {
   No_Signal = 128;
   
  drawVisual = requestAnimationFrame(draw);
-   for (var i = 0, n = 0; i < num_of_slices; i++) {
+   for (var i = 0, n = 0; i < num_of_slices; i++, n++) {
 
 	//var slice = boxes[i];
-	if((i % 3) == 0)
+	/*if((i % 3) == 0)
 	{
 		n++;
-	}
+	}*/
 	if (n >= fequencies.length)
 	{
 		n = 0;
 	}
 	var N = fequencies[n];
     var val = Math.abs(dataArray[N]) / No_Signal;//0-2
-	var balance =  Math.abs(dataArray[N]) - No_Signal;//0-30ish
-	//console.log("val: " + val);
+	var balance =  Math.abs(Math.abs(dataArray[N]) - No_Signal);//0-30ish
+	//console.log("val: " + balance);
 	
     hex_color = '';
-    var a = N % 16;//0-16 key
-	var oct = Math.floor(N / 255);//0-16 octave
+    //var a = N % 16;//0-16 key
+	
 	var r1,r2,g1,g2,b1,b2;
-	var power = Math.floor((Math.pow((balance),2)/26)+1);
-	if(a < 5)
+	var power = (Math.pow((balance),2)/255)+1;//0-15
+	var octane = Math.log(N);//0-8
+	var strenght = Math.log(balance) * Math.log(val*3)//0-8
+	if(balance > 15)
 	{
-		r1 = power;
-		r2 = power;
-		g1 = (oct/2)*val;
-		g2 = (oct/2)*val;
-		b1 = 0;
-		b2 = 0;
+		if(N < 512)
+		{
+			r1 = power;
+			r2 = power;
+			g1 = octane * (val*1.8);
+			g2 = strenght * val;
+			b1 = 0;
+			b2 = 0;
+			
+		}
+		else if (N > 512 && N < 2048)
+		{
+			r1 = 0;
+			r2 = 0;
+			g1 = power;
+			g2 = power;
+			b1 = octane * (val*1.4);
+			b2 = strenght * val;
+			
+		}
+		else
+		{
+			r1 = octane * val;
+			r2 = strenght * val;
+			g1 = 0;
+			g2 = 0;
+			b1 = power;
+			b2 = power;
+		}
+		//hex_color = 0;
+		hex_color += Math.floor(r1).toString(16);
+		hex_color += Math.floor(r2).toString(16);
 		
-	}
-	else if (a > 5 && a < 10)
-	{
-		r1 = 0;
-		r2 = 0;
-		g1 = power;
-		g2 = power;
-		b1 = (oct/2)*val;
-		b2 = (oct/2)*val;
+		hex_color += Math.floor(g1).toString(16);
+		hex_color += Math.floor(g2).toString(16);
 		
+		hex_color += Math.floor(b1).toString(16);
+		hex_color += Math.floor(b2).toString(16);
 	}
 	else
 	{
-		r1 = (oct/2)*val;
-		r2 = (oct/2)*val;
-		g1 = 0;
-		g2 = 0;
-		b1 = power;
-		b2 = power;
+		hex_color += Math.floor(Math.pow((val-.5),4)+1).toString(16);
+		hex_color += Math.floor(Math.pow((val-.5),4)+1).toString(16);
+		hex_color += Math.floor(Math.abs(balance)/2).toString(16);
+		hex_color += Math.floor(Math.abs(balance)/2).toString(16);
+		hex_color += Math.floor((Math.pow((balance),2)/26)+1).toString(16);
+		hex_color += Math.floor((Math.pow((balance),2)/26)+1).toString(16);
 	}
     //n::=16-31,31-66,66-131,131-262,262-524,524-1047,1047-2093,2093-4187,4187-7903. ::= scale
 	//C=16.35,cd=17.32,D=18.35,de=19.45,E=20.60,F=21.83,fg=23.12,G=24.50,ga=25.96,A=27.5,ab=29.14,B=30.87
@@ -118,12 +156,7 @@ function draw() {
 	//d[n] := intensity at that frequency
 	//0-15 0-255
 	// ff0000 red 00ff00 green 0000ff blue
-	hex_color += r1.toString(16);
-	hex_color += r2.toString(16);
-	hex_color += g1.toString(16);
-	hex_color += g2.toString(16);
-	hex_color += b1.toString(16);
-	hex_color += b2.toString(16);
+
 
     //console.log(hex_color);
 	boxes[i].style.backgroundColor = '#' + hex_color;

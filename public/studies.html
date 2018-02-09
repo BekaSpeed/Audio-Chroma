@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Chroma</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+	<link rel="stylesheet" href="./stylesheets/audioChroma.css">
+	<script src="study.js"></script>
+	<link rel="shortcut icon" type="image/x-icon" href="/AC_logo.png"/>
+</head>
+<body>
+
+
+<div class="container">
+      <div class="header">
+	<label for="show-menu" class="show-menu">Show Menu</label>
+	<input type="checkbox" id="show-menu" role="button">
+        <ul id="menu">
+          <li><a href="/home.html">Home</a></li>
+          <li>
+            <a href="#">About <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <ul class="hidden">
+              <li><a href="#">Who I Am</a></li>
+              <li><a href="#">What I Do</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Current Iterations<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <ul class="hidden">
+              <li><a href="/MonoChroma.html">MonoChroma</a></li>
+              <li><a href="/audioChroma.html">A Foray into Color</a></li>
+              <li><a href="#">Future Edition</a></li>
+            </ul>
+          </li>
+          <li><a class="active" href="/studies.html">Studies</a></li>
+          <li><a href="#">Contact</a></li>
+	</ul>	
+      </div>	
+      </div>
+      <div class="sidebar">
+	<h1>Studies</h1>
+	
+	<p>A place to prepare my tools and make new ones.<br>
+	   Some of my sources of inspiration when it comes to the "how".</P>
+	<a href="https://www.patrick-wied.at/blog/how-to-create-audio-visualizations-with-javascript-html">Patrick-Wied</a>
+	
+
+      </div>
+      <div class="main">
+		
+		<div class="control-panel">
+        <audio src="music/Legend_of_Zelda_Zelda_Heineken_OC_ReMix.mp3" id="audio" controls>Audio not supported</audio>
+		<select id="songs">
+        </select>
+		
+		<canvas id="myCanvas" width="200" height="100"></canvas>
+		</div>
+		<br>
+		<div id="boxes1"></div>
+		<div id="boxes2"></div>
+		<div id="boxes3"></div>
+	  </div>
+	  
+	  
+      <div class="footer">
+		<p>Art for the sake of Art</p>
+      </div>
+    </div>
+
+	
+</body>
+
+</html>

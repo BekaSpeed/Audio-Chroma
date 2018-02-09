@@ -16,4 +16,12 @@ router.get('/getMusic', function(req, res, next) {
   })
 });
 
+router.get('/getMusicData', function(req, res, next) {
+	var url = "https://api.getsongbpm.com/search/?api_key=ddc0aaf5425f7f5216975a10ad511860&type=artist&lookup=green+day";
+    var song = req.query.word.toLowerCase();
+    console.log(url + song);
+    request(url).pipe(res);
+  })
+});
+
 module.exports = router;

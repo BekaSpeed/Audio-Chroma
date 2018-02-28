@@ -53,6 +53,7 @@ div {
     display: inline-block;
     padding: 0px;
     height: 40px;
+	z-index:10;
 }
 
 .sidebar {

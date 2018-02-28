@@ -3,26 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Audio Chroma</title>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 	<link rel="stylesheet" href="./stylesheets/audioChroma.css">
-	<script src="study.js"></script>
+	<script src="./javascripts/TriBand.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="shortcut icon" type="image/x-icon" href="/AC_logo.png"/>
 </head>
 <body>
-
+ 
 
 <div class="container">
-      <div class="header">
+   <div class="header">
 			<script src="./javascripts/header.js"></script>
-      </div>
-      <div class="sidebar">
-	<h1>Studies</h1>
+    </div>
+    <div class="sidebar">
+	<h1>TriBand</h1>
 	
-	<p>A place to prepare my tools and make new ones.<br>
-	   Some of my sources of inspiration when it comes to the "how".</P>
-	<a href="https://www.patrick-wied.at/blog/how-to-create-audio-visualizations-with-javascript-html">Patrick-Wied</a>
+	<p>This is a synthesis of my previous iterations.<br>
+	   I finally found a missing piece of information about the return value of 
+	   the Fourier transform that made this possible and interesting to make.
+	   That missing information was that the values were bounded [0, 255]. Which 
+	   means that you can assign them straight to a color value without much effort.
+	   <br> Expect this page to change from time to time.</P>
+	
 	
 
       </div>
@@ -32,8 +36,7 @@
         <audio src="music/Legend_of_Zelda_Zelda_Heineken_OC_ReMix.mp3" id="audio" controls>Audio not supported</audio>
 		<select id="songs">
         </select>
-		
-		<canvas id="myCanvas" width="200" height="100"></canvas>
+	
 		</div>
 		<br>
 		<div id="boxes1"></div>

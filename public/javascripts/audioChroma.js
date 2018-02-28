@@ -17,20 +17,24 @@ for(i = 0; i < resolution; i++) {
   boxes.push(box);
 }
 
+
 $.getJSON('/getMusicData', function(json) {
-  var data = '<p></p>';
-  $.each(json, function(i, item) {
-    data += '<p>'  + item + '</p>';
-  });
-  $('.sidebar').html(data);
-})
-.done(function() { console.log('getMusicData getJSON request succeeded!'); })
+  var data = '<p>Testing</p>';
+	if (json != null){
+		data = '<p>'  + json.toString() + '</p>';
+	}
+	$('#data').html(data);
+  }).done(function() { console.log('getMusicData getJSON request succeeded!'); })
 .fail(function(jqXHR, textStatus, errorThrown) {
   console.log('getMusicData getJSON request failed! ' + textStatus);
   console.log('incoming ' + jqXHR.responseText);
 })
 .always(function() { console.log('getMusicData getJSON request ended!');
 });
+
+ 
+
+
 
 $.getJSON('/getMusic', function(json) {
   var options = '<option value=""></option>';

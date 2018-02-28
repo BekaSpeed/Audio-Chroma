@@ -1,8 +1,3 @@
-
-var lastMusicCallResult = Array.apply(null, Array(2048)).map(Number.prototype.valueOf,128);;
-
-console.log(lastMusicCallResult);
-
 window.onload = function() {
 	
 var boxes1 = [];
@@ -50,6 +45,8 @@ for(i = 0; i < boxes_lenght; i++) {
   boxes3.push(box);
 }	
 	
+	
+	
 $.getJSON('/getMusic', function(json) {
   var options = '<option value=""></option>';
   $.each(json, function(i, item) {
@@ -70,7 +67,6 @@ $('#songs').on('change', function() {
   $('#audio').attr('src', './music/' + $selected);
 });
 
-
 var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 var analyser = audioCtx.createAnalyser();
 var audio = document.getElementById('audio');
@@ -80,45 +76,17 @@ audioSrc.connect(audioCtx.destination);
 
 analyser.fftSize = 4096;
 var bufferLength = analyser.frequencyBinCount;
-
 var dataArray = new Uint8Array(bufferLength);
-var tranferFunctionArray = new Uint8Array(bufferLength);
-
-  // Get a canvas defined with ID "oscilloscope"
-var canvas = document.getElementById("myCanvas");
-var canvasCtx = canvas.getContext("2d");
 
   function draw() {
 
   drawVisual = requestAnimationFrame(draw);
+
   analyser.getByteTimeDomainData(dataArray);
+  
 
-	for(var j = 0; j < bufferLength; j++)
-	{
-		tranferFunctionArray[j] = lastMusicCallResult[j] - dataArray[j];
-	}
-	//console.log(tranferFunctionArray);
-	//console.log(lastMusicCallResult)
-	//console.log(dataArray)
-
-	//lastMusicCallResult = dataArray;
-	
-  canvasCtx.fillStyle = 'rgb(200, 200, 200)';
-  canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-
-  var total = dataArray.reduce(function(a, b) { return a+b;}, 0);
-  var ave = Math.floor(total/ (bufferLength * 64));
-  canvasCtx.lineWidth = ave;
-  canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
-
-  canvasCtx.beginPath();
-
-  var sliceWidth = canvas.width * 1.0 / bufferLength;
-  var x = 0;
   var z = 0;
-  
-  //console.log(ave);
-  
+
   for (var i = 0; i < bufferLength; i++, z++) {
 
 	hex_color1 = 0;
@@ -126,29 +94,15 @@ var canvasCtx = canvas.getContext("2d");
 	hex_color2 = 50;
 	hex_color2 += Math.floor(Math.abs(dataArray[i] - 50)).toString(16);
 	hex_color3 = 0;
-	hex_color3 += Math.floor(Math.abs(tranferFunctionArray[i])).toString(16);
-	
+	hex_color3 += Math.floor(Math.abs(dataArray[i])).toString(16);
 	z = z % boxes_lenght;
     //console.log(hex_color);
 	boxes1[z].style.backgroundColor = '#' + hex_color1;
 	boxes2[z].style.backgroundColor = '#' + hex_color2;
 	boxes3[z].style.backgroundColor = '#' + hex_color3;
 	
-    var v = dataArray[i] / 128.0;
-    var y = v * canvas.height / 2;
-
-    if (i === 0) {
-      canvasCtx.moveTo(x, y);
-    } else {
-      canvasCtx.lineTo(x, y);
-    }
-
-    x += sliceWidth;
-	
   }
 
-  canvasCtx.lineTo(canvas.width, canvas.height / 2);
-  canvasCtx.stroke();
 };
 
 draw();

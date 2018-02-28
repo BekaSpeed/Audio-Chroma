@@ -17,7 +17,7 @@ for(i = 0; i < 930; i++) {
 }
 
 $.getJSON('/getMusic', function(json) {
-  var options = '<option value=""></option>';
+  var options = '<option value="">Choose a song or play default</option>';
   $.each(json, function(i, item) {
     options += '<option value="' + item + '">' + item + '</option>';
   });

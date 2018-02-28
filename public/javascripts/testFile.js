@@ -18,14 +18,5 @@ $('#songs').on('change', function() {
   $('#audio').attr('src', './music/' + $selected);
 });
 
-function getData()
-{
-	 $.ajax(
-   {
-	   url: "https://api.getsongbpm.com/search/?api_key=ddc0aaf5425f7f5216975a10ad511860&type=artist&lookup=green+day", 
-	   method: "GET",
-	   success: function(result){
-        var data = document.createTextNode(result);
-		$('#data').appendChild(data);
-    }});
-};
+
+

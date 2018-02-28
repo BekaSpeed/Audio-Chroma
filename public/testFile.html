@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Audio Chroma</title>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./stylesheets/audioChroma.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="./stylesheets/audioChroma.css">
     <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="/AC_logo.png"/>
@@ -48,9 +48,33 @@
 	
         <p>This is a page separate from my pet project for me to test things out without breaking my project, while using it's file structure.</p>
 		<div class="control-panel">
-        <audio src="music/Legend_of_Zelda_Zelda_Heineken_OC_ReMix.mp3" id="audio" controls oncanplay="getData()">Audio not supported</audio>
+        <audio src="music/Legend_of_Zelda_Zelda_Heineken_OC_ReMix.mp3" id="audio" controls>Audio not supported</audio>
 		<select id="songs">
         </select>
+		<div id="demo">
+<button type="button" onclick="loadXMLDoc()">Change Content</button>
+</div>
+
+<script defer>
+          var myurl=  "https://api.getsongbpm.com/search/?api_key=ddc0aaf5425f7f5216975a10ad511860&type=artist&lookup=green+day";
+		  
+		  function jsonCallback(json){
+			console.log(json.name);
+		}
+		
+          console.log(myurl);
+          $.ajax({
+            url : myurl,
+            crossDomain: true,
+            dataType : "jsonp",
+			success : function(parsed_json) {
+              console.log(parsed_json);
+              
+              console.log(JSON.stringify(parsed_json["search"]));
+            }
+          });
+		 
+    </script>
 		</div>
       </div>
 	  
